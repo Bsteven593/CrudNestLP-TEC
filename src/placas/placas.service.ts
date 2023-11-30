@@ -25,12 +25,12 @@ export class PlacasService {
 
   }
 
-  findAll(paginacionDto:PaginacionDto) {
-    const {limit=10, offset=1} = paginacionDto;
-        return this.placaRepository.find({
-          take:limit,
-          skip:offset
-        });
+  findAll(paginacionDto: PaginacionDto) {
+    const { limit = 10, offset = 1 } = paginacionDto;
+    return this.placaRepository.find({
+      take: limit,
+      skip: offset
+    });
   }
 
   async findOne(id: number) {
@@ -45,15 +45,19 @@ export class PlacasService {
       id: id,
       ...updatePlacaDto
     })
-    if (placa)
+    if (!placa)
       throw new NotFoundException("No se elimino");
     await this.placaRepository.save(placa);
     return placa
   }
+    
+
+  
+  
 
   async remove(id: number) {
-    const placa = await this.findOne(id);
-    this.placaRepository.delete(placa);
+  const placa = await this.findOne(id);
+  this.placaRepository.delete(placa);
 
-  }
+}
 }

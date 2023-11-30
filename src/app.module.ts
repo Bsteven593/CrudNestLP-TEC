@@ -21,7 +21,7 @@ import { CommonModule } from './common/common.module';
       database:'bslm',
       autoLoadEntities:true, //carge automaticamente las entidades
       synchronize:true, 
-      dropSchema:true,
+      dropSchema:false,
 
       //en produccion se debe poner falsose debe poner falso
   }),
