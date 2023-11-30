@@ -1,21 +1,40 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { EntityUsuario } from "./usuario.entity";
+import { Placa } from "./placa.entity";
+
 
 @Entity('vehiculos')
-export class EntityVehiculo{
+export class EntityVehiculo {
     @PrimaryGeneratedColumn("increment")
     id: number;
 
     @Column()
-    marca:string;
+    marca: string;
 
     @Column()
-    modelo:string;
+    modelo: string;
 
     @Column()
-    temporada:string;
+    temporada: string;
 
     @Column()
-    serie:string
+    serie: string
+
+    @ManyToOne(() => EntityUsuario , usuario => usuario.vehiculos)
+    usuarios: EntityUsuario ;
+
+    //ejemplo
+    //@ManyToOne(
+    //    ()=>Alumno,
+    //    (alumno)=>alumno.curso
+    //    )
+    //alumno?:Alumno
+
+
+    @OneToOne(()=>Placa,(placa)=>placa.vehiculos)
+    @JoinColumn()
+    placas: Placa
+
 
 
 }

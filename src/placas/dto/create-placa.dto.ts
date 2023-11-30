@@ -7,7 +7,8 @@ export class CreatePlacaDto {
     serie: number
     @IsString()
     @MinLength(3)
-    provincia: string;
+    
+     provincia: string;
     @IsNumber()
     valor: number;
     

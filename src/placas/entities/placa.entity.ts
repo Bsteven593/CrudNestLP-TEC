@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, } from "typeorm";
+import { EntityVehiculo } from "./vehiculo.entity";
 
 @Entity('placas')
 export class Placa {
@@ -10,12 +11,15 @@ export class Placa {
     @Column('numeric')
     serie: number;
 
-    @Column('varchar', { nullable: true, })
+    @Column('varchar', { nullable: true,})
     provincia: string;
 
     @Column('numeric', { nullable: true })
     valor: number;
 
+    @OneToOne(()=>EntityVehiculo,(vehiculo)=>vehiculo.placas)
+    @JoinColumn()
+    vehiculos: EntityVehiculo
 
 }
 
