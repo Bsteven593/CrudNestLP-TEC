@@ -3,12 +3,11 @@ import { PlacasService } from './placas.service';
 import { PlacasController } from './placas.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Placa } from './entities/placa.entity';
-import { EntityUsuario } from './entities/usuario.entity';
-import { EntityVehiculo } from './entities/vehiculo.entity';
+import { CodigoEntity } from './entities/codigos.entity';
 
 @Module({
   imports:[TypeOrmModule.forFeature([
-    Placa,EntityUsuario,EntityVehiculo
+    Placa,CodigoEntity
 
   ])],
   controllers: [PlacasController],

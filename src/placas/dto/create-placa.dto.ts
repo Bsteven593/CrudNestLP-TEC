@@ -1,5 +1,5 @@
 import { IsNumber, IsString, MinLength } from "class-validator";
-import { Unique } from "typeorm";
+
 
 export class CreatePlacaDto {
 
@@ -7,11 +7,13 @@ export class CreatePlacaDto {
     serie: number
     @IsString()
     @MinLength(3)
-    
-     provincia: string;
+    provincia: string;
     @IsNumber()
     valor: number;
     
+    @IsString()
+    @MinLength(3)
+    codigoplacas?: string[];
 
 
 }

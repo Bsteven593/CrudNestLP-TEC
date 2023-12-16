@@ -1,5 +1,6 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, } from "typeorm";
-import { EntityVehiculo } from "./vehiculo.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, } from "typeorm";
+import { CodigoEntity } from "./codigos.entity";
+
 
 @Entity('placas')
 export class Placa {
@@ -17,9 +18,14 @@ export class Placa {
     @Column('numeric', { nullable: true })
     valor: number;
 
-    @OneToOne(()=>EntityVehiculo,(vehiculo)=>vehiculo.placas)
-    @JoinColumn()
-    vehiculos: EntityVehiculo
+    @OneToMany(
+     ()  =>CodigoEntity,
+     (codigo)=>codigo.placa,
+    {
+        cascade:true
+    })
+
+ codigoplacas?:Placa[]
 
 }
 
