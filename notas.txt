@@ -1,0 +1,13 @@
+http://localhost:3000/placas/
+
+{
+
+
+        "serie": "33",
+        "provincia": "Quito",
+        "valor": "98"
+        
+       
+
+    
+}
