@@ -2,8 +2,8 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn, } from "typeorm";
 import { CodigoEntity } from "./codigos.entity";
 
 
-@Entity('placas')
-export class Placa {
+@Entity('placa')
+export class PlacaEntity {
     @PrimaryGeneratedColumn("increment")
     id: number;
 
@@ -18,14 +18,7 @@ export class Placa {
     @Column('numeric', { nullable: true })
     valor: number;
 
-    @OneToMany(
-     ()  =>CodigoEntity,
-     (codigo)=>codigo.placa,
-    {
-        cascade:true
-    })
-
- codigoplacas?:Placa[]
-
+    @OneToMany(type=> CodigoEntity, codigo => codigo.placa)
+    codigos: CodigoEntity[];
 }
 

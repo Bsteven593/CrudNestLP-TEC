@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
-import { Placa } from "./placa.entity"
+import { PlacaEntity } from "./placa.entity"
 
-@Entity()
+@Entity('codigo')
 export class CodigoEntity{
 
   
@@ -11,10 +11,8 @@ export class CodigoEntity{
     @Column('text')
     serie:string
 
-    @ManyToOne(
-        ()=>Placa,
-        (placa)=>placa.codigoplacas
-    )
-    placa?:CodigoEntity
+    @ManyToOne(type => PlacaEntity, placa => placa.codigos)
+    placa:PlacaEntity
+    
 
 } 

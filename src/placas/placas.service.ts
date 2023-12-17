@@ -3,15 +3,15 @@ import { CreatePlacaDto } from './dto/create-placa.dto';
 import { UpdatePlacaDto } from './dto/update-placa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Placa } from './entities/placa.entity';
+import { PlacaEntity } from './entities/placa.entity';
 import { PaginacionDto } from '../common/dto/paginacion.dto';
 import { CodigoEntity } from './entities/codigos.entity';
 
 @Injectable()
 export class PlacasService {
   constructor(
-    @InjectRepository(Placa)
-    private readonly placaRepository: Repository<Placa>,
+    @InjectRepository(PlacaEntity)
+    private readonly placaRepository: Repository<PlacaEntity>,
   
 
   @InjectRepository(CodigoEntity)
@@ -23,14 +23,14 @@ export class PlacasService {
   async create(createPlacaDto: CreatePlacaDto) {
     try {
 
-      const {codigoplacas=[], ...placadetalles}=createPlacaDto
+      const {codigos=[], ...placadetalles}=createPlacaDto;
 
       const placas = this.placaRepository.create({
         ...placadetalles,
-        codigoplacas:codigoplacas.map(codigoplacas=>this.codigoRepository.create({serie:codigoplacas}))
+        codigos:codigos.map(codigos=>this.codigoRepository.create({serie:codigos}))
       });
       await this.placaRepository.save(placas);
-      return {...placas.codigoplacas};
+      return {...placas.codigos};
     } catch (error) {
       console.log(error);
       throw new Error('No se pudo realizar el ingreso');
@@ -55,7 +55,7 @@ export class PlacasService {
     const placa = await this.placaRepository.preload({
       id: id,
       ...updatePlacaDto,
-      codigoplacas:[]
+      codigos:[]
     })
     if (!placa) throw new NotFoundException('No se elimino');
     await this.placaRepository.save(placa);

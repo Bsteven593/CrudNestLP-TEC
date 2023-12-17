@@ -13,7 +13,7 @@ export class CreatePlacaDto {
     
     @IsString()
     @MinLength(3)
-    codigoplacas?: string[];
+    codigos: string[];
 
 
 }

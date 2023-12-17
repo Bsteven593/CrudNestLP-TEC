@@ -16,10 +16,10 @@ import { CommonModule } from './common/common.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5432,
+      port: 5433,
       username: 'postgres',
-      password: '1234',
-      database: 'bslm',
+      password: 'postgres',
+      database: 'deberes',
       autoLoadEntities: true, //carge automaticamente las entidades
       synchronize: true,
       dropSchema: false,
