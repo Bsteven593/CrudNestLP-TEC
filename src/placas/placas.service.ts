@@ -50,17 +50,24 @@ export class PlacasService {
     if (!placa) throw new NotFoundException(id);
     return placa;
   }
-
   async update(id: number, updatePlacaDto: UpdatePlacaDto) {
-    const placa = await this.placaRepository.preload({
-      id: id,
-      ...updatePlacaDto,
-      codigos:[]
-    })
-    if (!placa) throw new NotFoundException('No se elimino');
+    const placa = await this.placaRepository.findOne({ where: { id } });
+
+    if (!placa) {
+      // Return early instead of throwing an exception
+      return undefined;
+    }
+
+    // Update individual codes within codigos
+    for (const codigo of placa.codigos) {
+      // Update specific properties of each CodigoEntity based on your needs
+      codigo.id = updatePlacaDto.id;
+    }
+
     await this.placaRepository.save(placa);
     return placa;
   }
+  
 
   async remove(id: number) {
     const placa = await this.findOne(id);

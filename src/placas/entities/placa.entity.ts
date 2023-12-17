@@ -4,6 +4,9 @@ import { CodigoEntity } from "./codigos.entity";
 
 @Entity('placa')
 export class PlacaEntity {
+    static findOne(placaId: number) {
+      throw new Error('Method not implemented.');
+    }
     @PrimaryGeneratedColumn("increment")
     id: number;
 
